@@ -4,7 +4,7 @@ const axios = require('axios');
 const app = express();
 const PORT = 3000;
 
-const BASE_URL = process.env.EVALUATION_SERVICE_URL || 'http://localhost:4000'; // Default to localhost:4000
+const BASE_URL = process.env.EVALUATION_SERVICE_URL || 'http://localhost:4000';
 const TOKEN = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzQ4MzIxODM1LCJpYXQiOjE3NDgzMjE1MzUsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6ImRkNWQwNmVmLThjMmEtNDJjYy1iNmU1LWM2ZjhiNzBjZTUwMyIsInN1YiI6IjIyMzExYTYyMjZAY3Muc3JlZW5pZGhpLmVkdS5pbiJ9LCJlbWFpbCI6IjIyMzExYTYyMjZAY3Muc3JlZW5pZGhpLmVkdS5pbiIsIm5hbWUiOiJhcmVwYWxsaSBzaWRkaGFydGhhIGdvdWQiLCJyb2xsTm8iOiIyMjMxMWE2MjI2IiwiYWNjZXNzQ29kZSI6IlBDcUFVSyIsImNsaWVudElEIjoiZGQ1ZDA2ZWYtOGMyYS00MmNjLWI2ZTUtYzZmOGI3MGNlNTAzIiwiY2xpZW50U2VjcmV0IjoiWWdoVHdkZG1ubXVEVkpYWiJ9.HIPLsaoMwwNtnoy4ars7dzSmjcOI4vKqaPVrTFcgjuA';
 
 const fetchStockData = async (ticker, minutes) => {
@@ -30,7 +30,7 @@ app.get('/stocks/:ticker', async (req, res) => {
   }
 
   try {
-    const data = await fetchStockData(ticker, minutes || 60); // Default to 60 minutes if not provided
+    const data = await fetchStockData(ticker, minutes || 60);
     const prices = data.priceHistory.map((entry) => entry.price);
     const averagePrice = prices.reduce((sum, price) => sum + price, 0) / prices.length;
 
@@ -52,7 +52,7 @@ app.get('/stockcorrelation', async (req, res) => {
 
   try {
     const [data1, data2] = await Promise.all([
-      fetchStockData(ticker1, minutes || 60), // Default to 60 minutes if not provided
+      fetchStockData(ticker1, minutes || 60),
       fetchStockData(ticker2, minutes || 60),
     ]);
 

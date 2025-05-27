@@ -7,7 +7,6 @@ const BASE_URL = `http://localhost:${MOCK_PORT}`;
 const startMockServer = () => {
   const app = express();
 
-  // Original endpoints
   app.get('/stocks/:ticker', (req, res) => {
     const { ticker } = req.params;
     const { minutes } = req.query;
@@ -94,17 +93,15 @@ const startMockServer = () => {
   });
 };
 
-// Update test endpoints
 const testEndpoints = async () => {
   try {
-    // Test original endpoints
+
     console.log('Testing original /stocks/:ticker...');
     await axios.get(`${BASE_URL}/stocks/AAPL?minutes=30`);
 
     console.log('Testing original /stockcorrelation...');
     await axios.get(`${BASE_URL}/stockcorrelation?ticker1=AAPL&ticker2=MSFT&minutes=30`);
 
-    // Test new endpoints
     console.log('Testing /evaluation-service/stocks/:ticker...');
     await axios.get(`${BASE_URL}/evaluation-service/stocks/NVDA?minutes=50`);
 
